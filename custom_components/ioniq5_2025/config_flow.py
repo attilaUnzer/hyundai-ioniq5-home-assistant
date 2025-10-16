@@ -84,18 +84,34 @@ OPTIONS_SCHEMA = vol.Schema(
 
 async def validate_input(hass: HomeAssistant, user_input: dict[str, Any]) -> Token:
     """Validate the user input allows us to connect."""
-    api = VehicleManager.get_implementation_by_region_brand(
-        user_input[CONF_REGION],
-        user_input[CONF_BRAND],
-        language=hass.config.language,
-    )
-    token: Token = await hass.async_add_executor_job(
-        api.login, user_input[CONF_USERNAME], user_input[CONF_PASSWORD]
-    )
+    _LOGGER.debug("Starting validation for region=%s, brand=%s", user_input[CONF_REGION], user_input[CONF_BRAND])
+    
+    try:
+        api = VehicleManager.get_implementation_by_region_brand(
+            user_input[CONF_REGION],
+            user_input[CONF_BRAND],
+            language=hass.config.language,
+        )
+        _LOGGER.debug("API implementation retrieved: %s", type(api).__name__)
+    except Exception as err:
+        _LOGGER.error("Failed to get API implementation: %s", err, exc_info=True)
+        raise
+    
+    try:
+        _LOGGER.debug("Attempting login for username: %s", user_input[CONF_USERNAME])
+        token: Token = await hass.async_add_executor_job(
+            api.login, user_input[CONF_USERNAME], user_input[CONF_PASSWORD]
+        )
+        _LOGGER.debug("Login completed, token received: %s", token is not None)
+    except Exception as err:
+        _LOGGER.error("Login failed with error: %s", err, exc_info=True)
+        raise
 
     if token is None:
+        _LOGGER.error("Login returned None token")
         raise InvalidAuth
 
+    _LOGGER.info("Validation successful for %s", user_input[CONF_USERNAME])
     return token
 
 
@@ -145,17 +161,18 @@ class ConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         errors = {}
 
         try:
+            _LOGGER.info("Config flow: Starting validation")
             await validate_input(self.hass, user_input)
+            _LOGGER.info("Config flow: Validation successful")
         except InvalidAuth:
+            _LOGGER.warning("Config flow: Invalid authentication")
             errors["base"] = "invalid_auth"
-        except Exception:  # pylint: disable=broad-except
-            _LOGGER.exception("Unexpected exception")
+        except Exception as err:  # pylint: disable=broad-except
+            _LOGGER.error("Config flow: Unexpected exception - %s: %s", type(err).__name__, str(err), exc_info=True)
             errors["base"] = "unknown"
         else:
             if self.reauth_entry is None:
-                title = f"{BRANDS[user_input[CONF_BRAND]]} {
-                    REGIONS[user_input[CONF_REGION]]
-                } {user_input[CONF_USERNAME]}"
+                title = f"{BRANDS[user_input[CONF_BRAND]]} {REGIONS[user_input[CONF_REGION]]} {user_input[CONF_USERNAME]}"
                 await self.async_set_unique_id(
                     hashlib.sha256(title.encode("utf-8")).hexdigest()
                 )
