@@ -1,0 +1,65 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Hyundai Ioniq 5 (2025) - Europa",
+        "description": "Verbinden Sie Ihren Ioniq 5 mit Home Assistant über Hyundai Bluelink (Europa). \n\n⚠️ WICHTIG für EU-Benutzer: Bitte besuchen Sie zuerst www.hyundai.com, melden Sie sich an und akzeptieren Sie die Datenverarbeitung, bevor Sie fortfahren.",
+        "data": {
+          "username": "Bluelink E-Mail",
+          "password": "Bluelink Passwort",
+          "region": "Region (Europa vorausgewählt)",
+          "brand": "Marke (Hyundai für Ioniq 5)",
+          "pin": "PIN (optional, leer lassen wenn nicht gesetzt)"
+        },
+        "data_description": {
+          "username": "Ihre Hyundai Bluelink E-Mail-Adresse",
+          "password": "Ihr Hyundai Bluelink Passwort",
+          "region": "Wählen Sie Europa für österreichische/EU Fahrzeuge",
+          "pin": "Nur erforderlich wenn in der Bluelink App konfiguriert"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Ioniq 5 erneut authentifizieren",
+        "description": "Ihre Bluelink-Zugangsdaten müssen aktualisiert werden. Bitte geben Sie Ihre aktuellen Anmeldedaten ein."
+      }
+    },
+    "error": {
+      "invalid_auth": "Ungültige Anmeldedaten. Bitte überprüfen Sie Ihre Bluelink E-Mail und Passwort.",
+      "unknown": "Unerwarteter Fehler aufgetreten. Bitte Logs prüfen."
+    },
+    "abort": {
+      "already_configured": "Dieses Fahrzeug ist bereits konfiguriert",
+      "reauth_successful": "Erneute Authentifizierung erfolgreich"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Ioniq 5 Einstellungen",
+        "description": "Konfigurieren Sie Update-Intervalle und Funktionen für Ihren Ioniq 5",
+        "data": {
+          "scan_interval": "Update-Intervall (Minuten)",
+          "force_refresh": "Force-Refresh-Intervall (Minuten)",
+          "no_force_refresh_hour_start": "Keine Force-Updates ab (Stunde 0-23)",
+          "no_force_refresh_hour_finish": "Keine Force-Updates bis (Stunde 0-23)",
+          "enable_geolocation_entity": "Geolokalisierung aktivieren (Adressauflösung)",
+          "use_email_with_geocode_api": "E-Mail für Geocode-API verwenden"
+        },
+        "data_description": {
+          "scan_interval": "Wie oft gecachte Daten abgerufen werden (Standard: 30 Min)",
+          "force_refresh": "Wie oft das Fahrzeug geweckt wird (Standard: 240 Min / 4 Std)",
+          "no_force_refresh_hour_start": "Ruhezeit Start (Standard: 23 Uhr)",
+          "no_force_refresh_hour_finish": "Ruhezeit Ende (Standard: 6 Uhr)",
+          "enable_geolocation_entity": "GPS in Adresse umwandeln mit OpenStreetMap",
+          "use_email_with_geocode_api": "E-Mail bei Geocoding-Anfragen mitschicken"
+        }
+      }
+    }
+  },
+  "issues": {
+    "eu_consent_required": {
+      "title": "EU Einwilligung erforderlich",
+      "description": "Für EU-Nutzer: Bitte besuchen Sie https://www.hyundai.com und melden Sie sich an, um der Datenverarbeitung zuzustimmen, bevor Sie die Integration einrichten."
+    }
+  }
+}

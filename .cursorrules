@@ -1,0 +1,28 @@
+# Hyundai Ioniq 5 (2025) Europa Edition
+
+## Project Info
+- **Target**: Austrian/European Ioniq 5 2025 owners
+- **Integration**: Home Assistant custom component
+- **API**: Hyundai Bluelink EU (v3.48.1)
+- **Base**: kia_uvo (customized for Ioniq 5)
+
+## EU Optimizations
+- Region: Europe (default)
+- Brand: Hyundai (default)
+- API Endpoint: prd.eu-ccapi.hyundai.com:8080
+- Force Refresh: 4 hours (preserve 12V battery)
+- Quiet Hours: 23:00-06:00 (AT timezone)
+- Geolocation: Enabled (OpenStreetMap)
+- Language: German + English
+
+## Key Files
+- `custom_components/ioniq5_2025/` - Integration
+- `EU_SETUP_GUIDE.md` - German setup guide
+- `EU_FEATURES.md` - EU-specific features
+- `translations/de.json` - German UI
+
+## Before First Use
+1. Visit www.hyundai.com/de
+2. Accept data processing consent
+3. Wait 5-10 minutes
+4. Then configure in Home Assistant

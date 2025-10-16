@@ -1,0 +1,238 @@
+{
+  "title": "Hyundai Ioniq 5 (2025) Europa",
+  "config": {
+    "step": {
+      "user": {
+        "title": "Hyundai Ioniq 5 (2025) - Europa konfigurieren",
+        "description": "Verbinden Sie Ihren Ioniq 5 mit Home Assistant über Hyundai Bluelink.\n\n⚠️ WICHTIG für EU-Benutzer:\nBitte besuchen Sie zuerst www.hyundai.com, melden Sie sich an und akzeptieren Sie die Datenverarbeitung durch Hyundai, bevor Sie fortfahren.\n\nDetaillierte Anleitung: https://github.com/Hyundai-Kia-Connect/hyundai_kia_connect_api/wiki/Kia-Europe-Login-Flow",
+        "data": {
+          "username": "Bluelink E-Mail-Adresse",
+          "password": "Bluelink Passwort",
+          "region": "Region (Europa für Österreich)",
+          "brand": "Marke (Hyundai)",
+          "pin": "PIN (optional)"
+        }
+      },
+      "reauth_confirm": {
+        "title": "Ioniq 5 - Erneut authentifizieren",
+        "description": "Ihre Bluelink-Zugangsdaten müssen aktualisiert werden. Bitte geben Sie Ihre aktuellen Anmeldedaten ein."
+      }
+    },
+    "abort": {
+      "already_configured": "Dieses Fahrzeug ist bereits konfiguriert",
+      "reauth_successful": "Erneute Authentifizierung erfolgreich"
+    },
+    "error": {
+      "invalid_auth": "Anmeldung fehlgeschlagen. Bitte überprüfen Sie:\n1. E-Mail und Passwort korrekt\n2. Bei www.hyundai.com angemeldet und Einwilligung erteilt\n3. Ioniq 5 in Bluelink-App registriert",
+      "unknown": "Unbekannter Fehler aufgetreten"
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Ioniq 5 Einstellungen (Europa)",
+        "description": "Optimale Einstellungen für österreichische/europäische Benutzer",
+        "data": {
+          "scan_interval": "Aktualisierungs-Intervall (Minuten)",
+          "force_refresh": "Fahrzeug-Weck-Intervall (Minuten)",
+          "no_force_refresh_hour_start": "Ruhezeit Beginn (Stunde)",
+          "no_force_refresh_hour_finish": "Ruhezeit Ende (Stunde)",
+          "enable_geolocation_entity": "Standort-Adresse anzeigen (OpenStreetMap)",
+          "use_email_with_geocode_api": "E-Mail bei Standortabfragen verwenden"
+        }
+      }
+    }
+  },
+  "services": {
+    "force_update": {
+      "name": "Daten vom Fahrzeug abrufen",
+      "description": "Weckt Ihren Ioniq 5 und ruft aktuelle Fahrzeugdaten ab. Bitte sparsam verwenden!",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "update": {
+      "name": "Gecachte Daten aktualisieren",
+      "description": "Aktualisiert die Fahrzeugdaten aus dem Bluelink-Cache (weckt das Fahrzeug nicht)",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "start_climate": {
+      "name": "Klimatisierung starten",
+      "description": "Startet die Klimaanlage Ihres Ioniq 5. Verfügbare Optionen für EU-Modelle.",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        },
+        "duration": {
+          "name": "Dauer (Minuten)",
+          "description": "Wie lange die Klimatisierung laufen soll"
+        },
+        "climate": {
+          "name": "Klimaanlage",
+          "description": "Klimaanlage aktivieren"
+        },
+        "temperature": {
+          "name": "Temperatur (°C)",
+          "description": "Zieltemperatur in Celsius"
+        },
+        "defrost": {
+          "name": "Scheiben-Entfrostung",
+          "description": "Frontscheibe entfrosten"
+        },
+        "heating": {
+          "name": "Heizung",
+          "description": "Lenkradheizung und Heckscheibenheizung"
+        },
+        "flseat": {
+          "name": "Fahrersitz",
+          "description": "Sitzheizung/-kühlung Fahrersitz"
+        },
+        "frseat": {
+          "name": "Beifahrersitz",
+          "description": "Sitzheizung/-kühlung Beifahrersitz"
+        }
+      }
+    },
+    "stop_climate": {
+      "name": "Klimatisierung stoppen",
+      "description": "Stoppt die Klimatisierung des Ioniq 5",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "stop_charge": {
+      "name": "Ladevorgang stoppen",
+      "description": "Stoppt den aktuellen Ladevorgang",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "start_charge": {
+      "name": "Ladevorgang starten",
+      "description": "Startet den Ladevorgang Ihres Ioniq 5",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "lock": {
+      "name": "Fahrzeug verriegeln",
+      "description": "Verriegelt alle Türen Ihres Ioniq 5",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "unlock": {
+      "name": "Fahrzeug entriegeln",
+      "description": "Entriegelt alle Türen Ihres Ioniq 5",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "close_charge_port": {
+      "name": "Ladeklappe schließen",
+      "description": "Schließt die Ladeklappe (verfügbar bei EU 2023+ Modellen)",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "open_charge_port": {
+      "name": "Ladeklappe öffnen",
+      "description": "Öffnet die Ladeklappe (verfügbar bei EU 2023+ Modellen)",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "set_charge_limits": {
+      "name": "Ladebegrenzung einstellen",
+      "description": "Stellt die maximale Ladekapazität für AC und DC ein",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        },
+        "dc_limit": {
+          "name": "DC-Ladebegrenzung (%)",
+          "description": "Maximale Ladekapazität bei Schnellladung (DC)"
+        },
+        "ac_limit": {
+          "name": "AC-Ladebegrenzung (%)",
+          "description": "Maximale Ladekapazität bei normalem Laden (AC)"
+        }
+      }
+    },
+    "set_charging_current": {
+      "name": "Ladestrom anpassen",
+      "description": "Passt den AC-Ladestrom an (100%, 90%, 60%)",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        },
+        "level": {
+          "name": "Ladestrom (%)",
+          "description": "Ladestrom-Stufe"
+        }
+      }
+    },
+    "set_windows": {
+      "name": "Fenster steuern",
+      "description": "Öffnet oder schließt die Fenster (verfügbar bei EU 2023+ Modellen)",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "start_valet_mode": {
+      "name": "Valet-Modus starten",
+      "description": "Aktiviert den Valet-Modus (verfügbar bei EU 2023+ Modellen)",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    },
+    "stop_valet_mode": {
+      "name": "Valet-Modus beenden",
+      "description": "Deaktiviert den Valet-Modus",
+      "fields": {
+        "device_id": {
+          "name": "Fahrzeug",
+          "description": "Ihr Ioniq 5"
+        }
+      }
+    }
+  }
+}
